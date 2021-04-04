@@ -9,6 +9,7 @@ const cors = require('cors');
 const helmet = require('helmet');
 require('express-async-errors');
 const { NOT_FOUND } = require('http-status-codes');
+const fileUpload = require('express-fileupload');
 
 const winston = require('./common/logging');
 const wordRouter = require('./resources/words/word.router');
@@ -29,6 +30,7 @@ const swaggerDocument = YAML.load(path.join(__dirname, '../doc/api.yaml'));
 app.use(helmet());
 app.use(cors());
 app.use(express.json());
+app.use(fileUpload({}));
 
 app.use('/files', express.static(path.join(__dirname, '../files')));
 
